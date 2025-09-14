@@ -1,10 +1,11 @@
 'use client'
 
 import { configureStore } from "@reduxjs/toolkit"
+import { weatherReducer } from './slices/weatherSlice'
 
-//right now I have no reducers but thats ok for now
+//added reducer which connects it to the store
 export const store = configureStore({
   reducer: {
-    //future reducer
+    weather: weatherReducer
   },
 })
