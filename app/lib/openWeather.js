@@ -1,3 +1,5 @@
+
+
 import axios from "axios";
 
 export async function fetchForecast(city){
@@ -14,9 +16,9 @@ export async function fetchForecast(city){
 
 export function forecastData (raw){
   return {
-    city:
-    temps:
-    pressure:
-    humidities: 
+    city: `${raw?.city?.name ?? ''}${raw?.city?.country ? `, ${raw.city.country}` : ''}`,
+    temps: raw?.list?.map(i => i.main.temp) ?? [],
+    pressures: raw?.list?.map(i => i.main.pressure) ?? [],
+    humidities: raw?.list?.map(i => i.main.humidity) ?? []
   }
 }
