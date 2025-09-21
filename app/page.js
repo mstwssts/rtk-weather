@@ -13,7 +13,7 @@ export default function Home() {
   function handleSearch(cleanCity) {
     dispatch(clearError());                 
     dispatch(fetchForecastByCity(cleanCity)); 
-
+  }
   return (
     <main>
       <h1>Weather Charts</h1>
@@ -38,5 +38,5 @@ export default function Home() {
       )}
     </main>
   );
-  }
+  
 }
