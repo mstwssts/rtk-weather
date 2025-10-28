@@ -21,6 +21,6 @@ export default function SearchBar ({disabled=false, onSearch,placeholder="type a
       <button disabled={disabled || state.trim()}>
         { disabled ? 'Loading...' : 'Search' }
       </button>
-    </form>
+    </form>  
   )
 }
