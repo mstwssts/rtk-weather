@@ -25,7 +25,8 @@ export default function Home() {
       />
 
       {weather?.status === 'idle' && <p>Type a city and search.</p>}
-      {weather?.status === 'failed' && <p style={{ color: 'red' }}>{weather.error}</p>}
+
+      {weather?.status === 'failed' && <p>{weather.error}</p>}
       {weather?.status === 'succeeded' && (
         <>
           <h2>{weather.city}</h2>

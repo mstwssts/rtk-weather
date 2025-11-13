@@ -1,20 +1,21 @@
 'use client'
 
-import { createSlice,createAsyncThunk, isRejectedWithValue } from "@reduxjs/toolkit"
+import { createSlice,createAsyncThunk } from "@reduxjs/toolkit"
 import { fetchForecast, forecastData } from "@/app/lib/openWeather"
 
 // createAsyncThunk handles the action for side effects  
-
 export const fetchForecastByCity = createAsyncThunk(
-  async (city, { rejectedWithValue } ) => {
+  'weather/fetchForecastByCity',  
+  async (city, { rejectWithValue } ) => {
     try {
       const raw = await fetchForecast ( city )
-      return forecastData( raw )
+      return forecastData(raw)
     }
+
     catch ( err ){
       const apiMsg = err?.response?.data?.message
-      if ( apiMsg ) return rejectedWithValue( apiMsg ) 
-        return rejectedWithValue( 'Make Believe City, Try Again')
+      if ( apiMsg ) return rejectWithValue( apiMsg ) 
+        return rejectWithValue( 'Make Believe City, Try Again')
     }
   }
 )
@@ -40,12 +41,12 @@ const weatherSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchCityForecast.pending, (state) => {
+      .addCase(fetchForecastByCity.pending, (state) => {
         state.status = 'loading';
         state.error = null; 
       })
 
-      .addCase(fetchCityForecast.fulfilled, (state, action) => {
+      .addCase(fetchForecastByCity.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.city = action.payload.city;
         state.series.temps = action.payload.temps;
@@ -63,4 +64,4 @@ const weatherSlice = createSlice({
 //export actions made from reducer
 export const {clearError} = weatherSlice.actions
 //export the reducer so the store can use it 
-export default weatherSlice.reducer
+export const weatherReducer = weatherSlice.reducer
