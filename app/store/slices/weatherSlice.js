@@ -5,7 +5,7 @@ import { fetchForecast, forecastData } from "@/app/lib/openWeather"
 
 // createAsyncThunk handles the action for side effects  
 
-export const fetchCityForecast = createAsyncThunk(
+export const fetchForecastByCity = createAsyncThunk(
   async (city, { rejectedWithValue } ) => {
     try {
       const raw = await fetchForecast ( city )

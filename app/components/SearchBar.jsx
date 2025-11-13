@@ -3,7 +3,7 @@
 import { useState } from "react"
 
 export default function SearchBar ({disabled=false, onSearch,placeholder="type a city"}){
-  const [state,changeState] = useState('')
+  const [cityName,changeCityName] = useState('')
 
   function handleSubmit(e){
     e.preventDefault()
@@ -14,11 +14,11 @@ export default function SearchBar ({disabled=false, onSearch,placeholder="type a
   return(
     <form onSubmit={handleSubmit}>
       <input
-      value={state}
-      onChange={(e)=> changeState(e.target.value)}
+      value={cityName}
+      onChange={(e)=> changeCityName(e.target.value)}
       placeholder={placeholder}
       />
-      <button disabled={disabled || state.trim()}>
+      <button disabled={disabled || !cityName.trim()}>
         { disabled ? 'Loading...' : 'Search' }
       </button>
     </form>  
